@@ -16,6 +16,8 @@ describe("Card", () => {
         const lowCard = new Card(Value.Two, Suit.Diamonds);
 
         expect(highCard.isHigher(lowCard)).to.be.true;
+        expect(highCard.isHigher(highCard)).to.be.false;
+        expect(lowCard.isHigher(highCard)).to.be.false;
     });
 });
 

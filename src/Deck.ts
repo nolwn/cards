@@ -10,7 +10,7 @@ export default class Deck {
         this._hands = [];
     }
 
-    get cards() {
+    get cards(): string[] {
         return [...this._cards];
     }
 

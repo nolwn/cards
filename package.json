@@ -4,17 +4,27 @@
   "description": "Poker cards, hands, and decks",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "rm -fr dist && tsc",
     "mocha": "mocha",
+    "coverage": "nyc npm run test",
     "test": "mocha dist/test/unit.test.js"
+  },
+  "nyc": {
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "all": true,
+    "check-coverage": true
   },
   "author": "Nolan Hellyer",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "@types/mocha": "^5.2.7",
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
-    "tsc": "^1.20150623.0"
+    "nyc": "^14.1.1",
+    "source-map-support": "^0.5.13",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4"
   }
 }
