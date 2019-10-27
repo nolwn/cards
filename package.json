@@ -1,0 +1,20 @@
+{
+  "name": "cards",
+  "version": "0.0.1",
+  "description": "Poker cards, hands, and decks",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "mocha": "mocha",
+    "test": "mocha dist/test/unit.test.js"
+  },
+  "author": "Nolan Hellyer",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "tsc": "^1.20150623.0"
+  }
+}
