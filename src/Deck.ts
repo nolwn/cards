@@ -1,21 +1,33 @@
-import cards from "./cards.json";
+import Card from "./Card";
+import { Suit, Value } from "./utils";
 import * as _ from "lodash";
 
 export default class Deck {
-    private _cards: Array<string>;
-    private _hands: Array<Array<string>>;
+    private _cards: Card[];
+    private _hands: Card[][];
 
     constructor() {
         this._cards = this.openDeck();
         this._hands = [];
     }
 
-    get cards(): string[] {
+    get cards(): Card[] {
         return [...this._cards];
     }
 
-    openDeck(): Array<string> {
-        return [...cards];
+    openDeck(): Card[] {
+        const cards: Card[] = [];
+
+        for (let i = 0; i <= 3; i++) {
+            for (let j = 0; j <= 12; j++) {
+                const suit: Suit = i;
+                const value: Value = j;
+
+                cards.push(new Card(value, suit));
+            }
+        }
+
+        return cards;
     }
 
     cut(): void {
@@ -43,7 +55,7 @@ export default class Deck {
         }
     }
 
-    takeHand(): string[] {
+    takeHand(): Card[] {
         const hand = this._hands.shift();
 
         if (!hand) {

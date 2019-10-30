@@ -15,6 +15,7 @@ export enum Value {
     Seven,
     Eight,
     Nine,
+    Ten,
     Jack,
     Queen,
     King

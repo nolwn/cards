@@ -2,7 +2,6 @@ import { expect } from "chai";
 import Card from "../Card";
 import Deck from "../Deck";
 import { Suit, Value } from "../utils";
-import cards from "../cards.json";
 
 describe("Card", () => {
     it("should have a suit and a value", () => {
@@ -22,38 +21,103 @@ describe("Card", () => {
 });
 
 describe("Deck", () => {
+    const deckValues = [ 
+        "Ace",
+        "Two",
+        "Three",
+        "Four",
+        "Five",
+        "Six",
+        "Seven",
+        "Eight",
+        "Nine",
+        "Ten",
+        "Jack",
+        "Queen",
+        "King"
+    ];
+    
+    const deckSuits = [ 
+        "Diamonds",
+        "Clubs",
+        "Hearts",
+        "Spades"
+    ];
+    
     it("should open a new deck", () => {
         const deck: Deck = new Deck();
+        
+        expect(deck.cards.length).to.deep.equal(52);
+        checkSortedDeck(deckValues, deckSuits, deck);
 
-        expect(deck.cards).to.deep.equal(cards);
+        // let index = 0;
+        // let valueIndex = 0;
+        // let suitIndex = 0;
+        // while (index < 52) {
+        //     const card = deck.cards[index];
+        //     const value = deckValues[valueIndex++];
+        //     const suit = deckSuits[suitIndex];
+
+        //     expect(card.value).to.equal(Value[value]);
+        //     expect(card.suit).to.equal(Suit[suit]);
+            
+        //     index++;
+
+        //     if (valueIndex >= deckValues.length) {
+        //         valueIndex = 0;
+        //         suitIndex++;
+        //     }
+        // }
     });
 
     it("should cut the deck", () => {
         const deck: Deck = new Deck();
-        const cutCards: string[] = [ ...cards.slice(26), ...cards.slice(0, 26) ];
+        const cutValues = [ ...deckValues.slice(26), ...deckValues.slice(0, 26) ];
+        const cutSuits = [ ...deckSuits.slice(2), ...deckSuits.slice(0, 2) ];
 
         deck.cut();
 
-        expect(deck.cards).to.deep.equal(cutCards);
+        expect(deck.cards.length).to.deep.equal(52);
+        checkSortedDeck(cutValues, cutSuits, deck);
+
+        // let index = 0;
+        // let valueIndex = 0;
+        // let suitIndex = 0;
+        // while (index < 52) {
+        //     const card = deck.cards[index];
+        //     const value = deckValues[valueIndex++];
+        //     const suit = deckSuits[suitIndex];
+
+        //     expect(card.value).to.equal(Value[value]);
+        //     expect(card.suit).to.equal(Suit[suit]);
+
+        //     index++;
+
+        //     if (valueIndex >= deckValues.length) {
+        //         valueIndex = 0;
+        //         suitIndex++;
+        //     }
+        // }
     });
 
     it("should shuffle the deck", () => {
         const deckOne: Deck = new Deck();
         const deckTwo: Deck = new Deck();
+        const unshuffledDeck = new Deck();
         
         deckOne.shuffle();
         deckTwo.shuffle();
 
-        expect(deckOne.cards.length).to.equal(cards.length);
-        expect(deckOne.cards).to.not.deep.equal(cards);
+        expect(deckOne.cards.length).to.equal(52);
+        expect(deckOne.cards).to.not.deep.equal(unshuffledDeck.cards);
         expect(deckTwo.cards).to.not.deep.equal(deckOne.cards);
     });
 
     it("should deal out a given number of hands", () => {
         const deck: Deck = new Deck();
-        let hands: string[][];
-        let hand: string[];
-        let expectedHand: string[];
+        let hands: Card[][];
+        let hand: Card[];
+        let expectedHand: Card[];
 
         deck.shuffle();
 
@@ -95,3 +159,24 @@ describe("Deck", () => {
         expect(deck.takeHand()).to.be.null;
     });
 });
+
+const checkSortedDeck = (deckValues, deckSuits, deck) => {
+    let index = 0;
+    let valueIndex = 0;
+    let suitIndex = 0;
+    while (index < 52) {
+        const card = deck.cards[index];
+        const value = deckValues[valueIndex++];
+        const suit = deckSuits[suitIndex];
+
+        expect(card.value).to.equal(Value[value]);
+        expect(card.suit).to.equal(Suit[suit]);
+
+        index++;
+
+        if (valueIndex >= deckValues.length) {
+            valueIndex = 0;
+            suitIndex++;
+        }
+    }
+}
