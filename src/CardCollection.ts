@@ -6,7 +6,7 @@ export class CardCollection {
     protected _cards;
 
     constructor(cards: Card[]) {
-        this._cards = cards;
+        this._cards = [...cards];
         this._count = cards.length;
     }
 
@@ -28,12 +28,12 @@ export class CardCollection {
     }
 
     shuffle() {
-        _.shuffle(this._cards);
+        this._cards = _.shuffle(this._cards);
     }
 
     cut() {
-        const top = [this._cards.slice(0, this._count)];
-        const bottom = [this._count.slice(this._count)];
+        const top = this._cards.slice(0, this._count / 2);
+        const bottom = this._cards.slice(this._count / 2);
         
         this._cards = [...bottom, ...top];
     }
