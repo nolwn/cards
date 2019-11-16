@@ -49,25 +49,6 @@ describe("Deck", () => {
         
         expect(deck.cards.length).to.deep.equal(52);
         checkSortedDeck(deckValues, deckSuits, deck);
-
-        // let index = 0;
-        // let valueIndex = 0;
-        // let suitIndex = 0;
-        // while (index < 52) {
-        //     const card = deck.cards[index];
-        //     const value = deckValues[valueIndex++];
-        //     const suit = deckSuits[suitIndex];
-
-        //     expect(card.value).to.equal(Value[value]);
-        //     expect(card.suit).to.equal(Suit[suit]);
-            
-        //     index++;
-
-        //     if (valueIndex >= deckValues.length) {
-        //         valueIndex = 0;
-        //         suitIndex++;
-        //     }
-        // }
     });
 
     it("should cut the deck", () => {
@@ -79,25 +60,6 @@ describe("Deck", () => {
 
         expect(deck.cards.length).to.deep.equal(52);
         checkSortedDeck(cutValues, cutSuits, deck);
-
-        // let index = 0;
-        // let valueIndex = 0;
-        // let suitIndex = 0;
-        // while (index < 52) {
-        //     const card = deck.cards[index];
-        //     const value = deckValues[valueIndex++];
-        //     const suit = deckSuits[suitIndex];
-
-        //     expect(card.value).to.equal(Value[value]);
-        //     expect(card.suit).to.equal(Suit[suit]);
-
-        //     index++;
-
-        //     if (valueIndex >= deckValues.length) {
-        //         valueIndex = 0;
-        //         suitIndex++;
-        //     }
-        // }
     });
 
     it("should shuffle the deck", () => {

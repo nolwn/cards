@@ -1,18 +1,25 @@
 import Card from "./Card";
 import { Suit, Value } from "./utils";
 import * as _ from "lodash";
+import { CardCollection } from "./CardCollection";
 
-export default class Deck {
-    private _cards: Card[];
+export default class Deck extends CardCollection{
     private _hands: Card[][];
 
     constructor() {
-        this._cards = this.openDeck();
-        this._hands = [];
-    }
+        const cards: Card[] = [];
 
-    get cards(): Card[] {
-        return [...this._cards];
+        for (let i = 0; i <= 3; i++) {
+            for (let j = 0; j <= 12; j++) {
+                const suit: Suit = i;
+                const value: Value = j;
+
+                cards.push(new Card(value, suit));
+            }
+        }
+
+        super(cards);
+        this._hands = [];
     }
 
     openDeck(): Card[] {
@@ -30,16 +37,6 @@ export default class Deck {
         return cards;
     }
 
-    cut(): void {
-        this._cards = [...this._cards.slice(26), ...this._cards.slice(0, 26)];
-    }
-
-    shuffle(): void {
-        const cards = _.shuffle(this._cards);
-
-        this._cards = cards;
-    }
-
     deal(n: number): void {
         let j = 0;
         for (let i = 0; i < this._cards.length; i++) {
@@ -53,6 +50,8 @@ export default class Deck {
                 j = 0;
             }
         }
+
+        this._count = 0;
     }
 
     takeHand(): Card[] {
