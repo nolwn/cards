@@ -1,7 +1,7 @@
 import Card from "./Card";
+import CardCollection from "./CardCollection";
 import { Suit, Value } from "./utils";
 import * as _ from "lodash";
-import { CardCollection } from "./CardCollection";
 
 export default class Deck extends CardCollection{
     private _hands: Card[][];
@@ -20,21 +20,6 @@ export default class Deck extends CardCollection{
 
         super(cards);
         this._hands = [];
-    }
-
-    openDeck(): Card[] {
-        const cards: Card[] = [];
-
-        for (let i = 0; i <= 3; i++) {
-            for (let j = 0; j <= 12; j++) {
-                const suit: Suit = i;
-                const value: Value = j;
-
-                cards.push(new Card(value, suit));
-            }
-        }
-
-        return cards;
     }
 
     deal(n: number): void {
@@ -63,5 +48,9 @@ export default class Deck extends CardCollection{
         }
 
         return hand;
+    }
+
+    shuffle(): void {
+        this._cards = _.shuffle(this._cards);
     }
 }
